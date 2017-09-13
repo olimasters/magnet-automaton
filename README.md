@@ -1,8 +1,8 @@
-# magnatron3000
+# magnet-automaton
 
 ## Summary
 
-magnatron3000 is a simulation of a model of a magnet.  Physical justification TBC.
+magnet-automaton is a simulation of a model of a magnet.  Physical justification TBC.
 
 ## Model used
 
