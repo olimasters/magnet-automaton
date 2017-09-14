@@ -7,7 +7,7 @@ LFLAGS = -Wall
 magnet : $(OBJS)
 	$(CC) $(LFLAGS) $(OBJS) -o magnet
 
-Main.o : Main.h Main.cpp Magnet.h
+Main.o : Main.cpp Magnet.h
 	$(CC) $(CFLAGS) Main.cpp
 
 Magnet.o : Magnet.cpp Magnet.h
