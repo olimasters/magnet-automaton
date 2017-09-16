@@ -1,3 +1,4 @@
+#include <random>
 #include "Magnet.h"
 
 Magnet::Magnet(unsigned height, unsigned width)

@@ -1,6 +1,4 @@
-#include <iterator>
 #include <vector>
-#include <random>
 
 class Magnet
 {
