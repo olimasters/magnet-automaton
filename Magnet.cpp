@@ -20,7 +20,7 @@ bool Magnet::update(int i,int j)
 {
     if(updatePending(i,j))
     {
-        spins[i][j] = spins[i][j] == 1 ? -1 : 1;
+        spins[i][j] = -spins[i][j];
         return true;
     }
     else
