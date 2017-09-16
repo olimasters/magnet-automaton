@@ -1,22 +1,22 @@
 #include "Magnet.h"
 
-Magnet::Magnet(int height, int width)
+Magnet::Magnet(unsigned height, unsigned width)
 {
     std::random_device rd;
     std::mt19937 gen(rd());        //Using Mersenne twister
     std::uniform_int_distribution<> distribution(0,1);    //Evenly 0s and 1s
 
     spins.reserve(height);
-    for(int i=0;i<height;i++)
+    for(unsigned i = 0; i < height; i++)
     {
         spins.push_back(std::vector<int>());    //Puts an empty vector on it
         spins[i].reserve(width);
-        for(int j=0;j<width;j++)
+        for(unsigned j = 0; j < width; j++)
             spins[i].push_back(distribution(gen));
     }
 }
 
-bool Magnet::update(int i,int j)
+bool Magnet::update(unsigned i, unsigned j)
 {
     if(updatePending(i,j))
     {
@@ -29,18 +29,18 @@ bool Magnet::update(int i,int j)
 
 bool Magnet::isStable(void)
 {
-    for(int i = 0; i < spins.size(); i++)
-        for(int j = 0; j < (spins[i]).size(); j++)
+    for(unsigned i = 0; i < spins.size(); i++)
+        for(unsigned j = 0; j < (spins[i]).size(); j++)
             if(updatePending(i,j))
                 return false;
     //If we reach here then there are no updates pending
     return true;
 }
 
-bool Magnet::updatePending(int i,int j)
+bool Magnet::updatePending(unsigned i, unsigned j)
 {
-    int neighbours = 0;
-    int differing;
+    unsigned neighbours = 0;
+    unsigned differing;
 
     //  Goes through each possible direction (up, down, left, right).
     //  Increments neighbours iff there is a neighbour in that direction
