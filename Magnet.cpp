@@ -13,7 +13,7 @@ Magnet::Magnet(unsigned height, unsigned width)
         spins.push_back(std::vector<int>());    //Puts an empty vector on it
         spins[i].reserve(width);
         for(unsigned j = 0; j < width; j++)
-            spins[i].push_back(distribution(gen));
+            spins[i].push_back(distribution(gen) ? 1 : -1);
     }
 }
 
