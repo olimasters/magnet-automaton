@@ -41,7 +41,7 @@ bool Magnet::isStable(void)
 bool Magnet::updatePending(unsigned i, unsigned j)
 {
     unsigned neighbours = 0;
-    unsigned differing;
+    unsigned differing = 0;
 
     //  Goes through each possible direction (up, down, left, right).
     //  Increments neighbours iff there is a neighbour in that direction
@@ -49,10 +49,10 @@ bool Magnet::updatePending(unsigned i, unsigned j)
     //  also increments differing iff that neighbour differs from the spin
     //  in position (i,j).
     //  This shamelessly treats true as 1 and false as 0.
-    differing = ( (i != 0 && ++neighbours) && (spins[i-1][j] != spins[i][j]) )
-        +       ( (j != 0 && ++neighbours) && (spins[i][j-1] != spins[i][j]) )
-        +       ( ((i != spins.size()-1) && ++neighbours) && (spins[i+1][j] != spins[i][j]) )
-        +       ( ((j != spins[i].size()-1) && ++neighbours) && (spins[i][j+1] != spins[i][j]) );
+    differing += ((i != 0 && ++neighbours) && (spins[i-1][j] != spins[i][j]));
+    differing += ((j != 0 && ++neighbours) && (spins[i][j-1] != spins[i][j]));
+    differing += (((i != spins.size()-1) && ++neighbours) && (spins[i+1][j] != spins[i][j]));
+    differing += (((j != spins[i].size()-1) && ++neighbours) && (spins[i][j+1] != spins[i][j]));
 
     // There was an update pending on (i,j) iff differing neighbours were the
     // majority of the neighbours
