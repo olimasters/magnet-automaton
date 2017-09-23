@@ -8,7 +8,7 @@ CFLAGS = -Wall -c -O2
 LFLAGS = -Wall
 
 $(BINDIR)/magnet : $(OBJS)
-	$(CC) $(LFLAGS) $(OBJS) -o $(BINDIR)/magnet
+	$(CC) $(LFLAGS) $^ -o $(BINDIR)/magnet
 
 $(BUILDDIR)/Main.o : $(SRCDIR)/Main.cpp $(SRCDIR)/Magnet.h
 	$(CC) $(CFLAGS) $< -o $@
