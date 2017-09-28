@@ -1,19 +1,22 @@
-OBJS = Main.o Magnet.o
+SRCDIR = src
+BINDIR = bin
+BUILDDIR = build
+OBJS = $(BUILDDIR)/Main.o $(BUILDDIR)/Magnet.o
 CC = g++
 DEBUG = -g
 CFLAGS = -Wall -c -O2
 LFLAGS = -Wall
 
-magnet : $(OBJS)
-	$(CC) $(LFLAGS) $(OBJS) -o magnet
+$(BINDIR)/magnet : $(OBJS)
+	$(CC) $(LFLAGS) $^ -o $(BINDIR)/magnet
 
-Main.o : Main.cpp Magnet.h
-	$(CC) $(CFLAGS) Main.cpp
+$(BUILDDIR)/Main.o : $(SRCDIR)/Main.cpp $(SRCDIR)/Magnet.h
+	$(CC) $(CFLAGS) $< -o $@
 
-Magnet.o : Magnet.cpp Magnet.h
-	$(CC) $(CFLAGS) Magnet.cpp
+$(BUILDDIR)/Magnet.o : $(SRCDIR)/Magnet.cpp $(SRCDIR)/Magnet.h
+	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	\rm *.o magnet
+	\rm $(BUILDDIR)/*.o $(BINDIR)/magnet
 
 
