@@ -17,6 +17,10 @@ Magnet::Magnet(unsigned height, unsigned width)
     }
 }
 
+unsigned Magnet::getHeight(void){return spins.size();}
+
+unsigned Magnet::getWidth(void){return spins[0].size();}
+
 bool Magnet::update(unsigned i, unsigned j)
 {
     if(updatePending(i,j))
