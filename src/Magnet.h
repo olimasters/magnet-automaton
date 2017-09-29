@@ -1,3 +1,6 @@
+#ifndef MAGNET_H
+#define MAGNET_H
+
 #include <vector>
 
 class Magnet
@@ -14,3 +17,5 @@ class Magnet
         bool updatePending(unsigned i, unsigned j);
             // Whether or not (i,j) is due an update.
 };
+
+#endif
