@@ -8,8 +8,11 @@ class Magnet
     public:
         Magnet(unsigned width, unsigned height);
             // Magnet is initialised randomly
+        // Getters
         unsigned getHeight(void);
         unsigned getWidth(void);
+        const std::vector<std::vector<int>>& getSpins(void);
+
         bool update(unsigned i, unsigned j);
             // Updates (i,j), if possible.  Returns true iff update occurred.
         bool isStable(void);

@@ -21,6 +21,8 @@ unsigned Magnet::getHeight(void){return spins.size();}
 
 unsigned Magnet::getWidth(void){return spins[0].size();}
 
+const std::vector<std::vector<int>>& getSpins(void){return spins};
+
 bool Magnet::update(unsigned i, unsigned j)
 {
     if(updatePending(i,j))
