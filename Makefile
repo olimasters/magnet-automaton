@@ -7,7 +7,7 @@ OBJS = $(BUILDDIR)/Main.o $(BUILDDIR)/Magnet.o
 TESTOBJS = $(BUILDDIR)/Magnet_test.o $(BUILDDIR)/tester.o $(BUILDDIR)/Magnet.o
 CC = g++
 DEBUG = -g
-CFLAGS = -Wall -c -O2
+CFLAGS = -Wall -c -O2 -std=c++11
 LFLAGS = -Wall
 
 .PHONY: all target tests
