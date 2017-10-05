@@ -8,7 +8,8 @@ class Magnet
 {
     public:
         Magnet(unsigned width, unsigned height);
-            // Magnet is initialised randomly
+        Magnet(std::vector<std::vector<int>> spins);
+            // Magnet is initialised randomly or with specific spins
         // Getters
         unsigned getHeight(void);
         unsigned getWidth(void);

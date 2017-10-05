@@ -10,7 +10,7 @@ DEBUG = -g
 CFLAGS = -Wall -c -O2
 LFLAGS = -Wall
 
-.PHONY: all target tests
+.PHONY: all target tests clean
 
 all: target tests
 
@@ -37,6 +37,6 @@ $(BUILDDIR)/Magnet_test.o : $(TESTDIR)/Magnet_test.cpp $(SRCDIR)/Magnet.h
 	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(SRCDIR) $< -o $@
 
 clean:
-	\rm $(BUILDDIR)/*.o $(BINDIR)/magnet
+	rm -f $(BUILDDIR)/*.o $(BINDIR)/*
 
 

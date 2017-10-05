@@ -15,6 +15,12 @@ Magnet::Magnet(unsigned height, unsigned width):
     }
 }
 
+Magnet::Magnet(std::vector<std::vector<int>> spins):
+    rng(std::random_device{}())
+{
+    this->spins = spins;
+}
+
 unsigned Magnet::getHeight(void){return spins.size();}
 
 unsigned Magnet::getWidth(void){return spins[0].size();}
