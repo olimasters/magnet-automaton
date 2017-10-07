@@ -1,10 +1,8 @@
-#include <random>
 #include "Magnet.h"
 
-Magnet::Magnet(unsigned height, unsigned width)
+Magnet::Magnet(unsigned height, unsigned width):
+    rng(std::random_device{}())
 {
-    std::random_device rd;
-    std::mt19937 gen(rd());        //Using Mersenne twister
     std::uniform_int_distribution<> distribution(0,1);    //Evenly 0s and 1s
 
     spins.reserve(height);
@@ -13,13 +11,28 @@ Magnet::Magnet(unsigned height, unsigned width)
         spins.push_back(std::vector<int>());    //Puts an empty vector on it
         spins[i].reserve(width);
         for(unsigned j = 0; j < width; j++)
-            spins[i].push_back(distribution(gen) ? 1 : -1);
+            spins[i].push_back(distribution(rng) ? 1 : -1);
     }
+}
+
+Magnet::Magnet(std::vector<std::vector<int>> spins):
+    rng(std::random_device{}())
+{
+    this->spins = spins;
 }
 
 unsigned Magnet::getHeight(void){return spins.size();}
 
 unsigned Magnet::getWidth(void){return spins[0].size();}
+
+const std::vector<std::vector<int>>& Magnet::getSpins(void){return spins;};
+
+bool Magnet::randomUpdate(void)
+{
+    std::uniform_int_distribution<> width_distribution(getWidth());
+    std::uniform_int_distribution<> height_distribution(getHeight());
+    return update(width_distribution(rng), height_distribution(rng));
+}
 
 bool Magnet::update(unsigned i, unsigned j)
 {
