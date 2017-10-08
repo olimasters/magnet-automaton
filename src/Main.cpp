@@ -4,7 +4,7 @@
 int main(int argc, char *argv[])
 {
     Settings settings;
-    settings.framerate = 60;
+    settings.framerate = 1000;
     settings.magnetHeight = 20;
     settings.magnetWidth = 20;
     settings.spinSize = 20;
