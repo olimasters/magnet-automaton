@@ -3,12 +3,12 @@ TESTDIR = test
 BINDIR = bin
 BUILDDIR = build
 INCLUDE = include
-OBJS = $(BUILDDIR)/Main.o $(BUILDDIR)/Magnet.o
+OBJS = $(BUILDDIR)/Main.o $(BUILDDIR)/Magnet.o $(BUILDDIR)/Controller.o $(BUILDDIR)/Visualiser.o
 TESTOBJS = $(BUILDDIR)/Magnet_test.o $(BUILDDIR)/tester.o $(BUILDDIR)/Magnet.o
 CC = g++
 DEBUG = -g
-CFLAGS = -Wall -c -O2 -std=c++11
-LFLAGS = -Wall
+CFLAGS = -Wall -c -O2 $(DEBUG) -std=c++11
+LFLAGS = -Wall -lSDL2
 
 .PHONY: all target tests clean
 
@@ -24,10 +24,16 @@ $(BINDIR)/magnet : $(OBJS)
 $(BINDIR)/tester : $(TESTOBJS)
 	$(CC) $(LFLAGS) $^ -o $(BINDIR)/tester
 
-$(BUILDDIR)/Main.o : $(SRCDIR)/Main.cpp $(SRCDIR)/Magnet.h
+$(BUILDDIR)/Main.o : $(SRCDIR)/Main.cpp $(SRCDIR)/Controller.h
+	$(CC) $(CFLAGS) -I$(INCLUDE) $< -o $@
+
+$(BUILDDIR)/Controller.o : $(SRCDIR)/Controller.cpp $(SRCDIR)/Controller.h $(SRCDIR)/Magnet.h $(SRCDIR)/Visualiser.h 
 	$(CC) $(CFLAGS) -I$(INCLUDE) $< -o $@
 
 $(BUILDDIR)/Magnet.o : $(SRCDIR)/Magnet.cpp $(SRCDIR)/Magnet.h
+	$(CC) $(CFLAGS) -I$(INCLUDE) $< -o $@
+
+$(BUILDDIR)/Visualiser.o : $(SRCDIR)/Visualiser.cpp $(SRCDIR)/Visualiser.h $(SRCDIR)/Magnet.h
 	$(CC) $(CFLAGS) -I$(INCLUDE) $< -o $@
 
 $(BUILDDIR)/tester.o : $(TESTDIR)/tester.cpp
@@ -38,5 +44,3 @@ $(BUILDDIR)/Magnet_test.o : $(TESTDIR)/Magnet_test.cpp $(SRCDIR)/Magnet.h
 
 clean:
 	rm -f $(BUILDDIR)/*.o $(BINDIR)/*
-
-

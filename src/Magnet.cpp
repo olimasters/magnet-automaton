@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Magnet.h"
 
 Magnet::Magnet(unsigned height, unsigned width):
@@ -21,17 +22,26 @@ Magnet::Magnet(std::vector<std::vector<int>> spins):
     this->spins = spins;
 }
 
-unsigned Magnet::getHeight(void){return spins.size();}
+unsigned Magnet::getHeight(void) const
+{
+    return spins.size();
+}
 
-unsigned Magnet::getWidth(void){return spins[0].size();}
+unsigned Magnet::getWidth(void) const
+{
+    return spins[0].size();
+}
 
-const std::vector<std::vector<int>>& Magnet::getSpins(void){return spins;};
+const std::vector<std::vector<int>>& Magnet::getSpins(void) const
+{
+    return spins;
+};
 
 bool Magnet::randomUpdate(void)
 {
-    std::uniform_int_distribution<> width_distribution(getWidth());
-    std::uniform_int_distribution<> height_distribution(getHeight());
-    return update(width_distribution(rng), height_distribution(rng));
+    std::uniform_int_distribution<> width_distribution(0, getWidth() - 1);
+    std::uniform_int_distribution<> height_distribution(0, getHeight() - 1);
+    return update(height_distribution(rng), width_distribution(rng));
 }
 
 bool Magnet::update(unsigned i, unsigned j)
@@ -45,7 +55,7 @@ bool Magnet::update(unsigned i, unsigned j)
         return false;
 }
 
-bool Magnet::isStable(void)
+bool Magnet::isStable(void) const
 {
     for(unsigned i = 0; i < spins.size(); i++)
         for(unsigned j = 0; j < (spins[i]).size(); j++)
@@ -55,7 +65,7 @@ bool Magnet::isStable(void)
     return true;
 }
 
-bool Magnet::updatePending(unsigned i, unsigned j)
+bool Magnet::updatePending(unsigned i, unsigned j) const
 {
     unsigned neighbours = 0;
     unsigned differing = 0;

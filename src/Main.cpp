@@ -1,9 +1,17 @@
 #include <iostream>
-#include "Magnet.h"
+#include "Controller.h"
 
 int main(int argc, char *argv[])
 {
-    Magnet magnet(10,10);
-    std::cout << "Successfully created a magnet" << std::endl;
+    Settings settings;
+    settings.framerate = 60;
+    settings.magnetHeight = 20;
+    settings.magnetWidth = 20;
+    settings.spinSize = 20;
+    settings.positiveColour = {255,0,0};
+    settings.negativeColour = {0,0,255};
+    Controller controller(settings);
+    controller.run();
+    std::cout << "Stability achieved." << std::endl;
     return 0;
 }
