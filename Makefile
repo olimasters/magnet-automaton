@@ -19,10 +19,10 @@ target: $(BINDIR)/magnet
 tests: $(BINDIR)/tester
 
 $(BINDIR)/magnet : $(OBJS)
-	$(CC) $(LFLAGS) $^ -o $(BINDIR)/magnet
+	$(CC) $^ -o $(BINDIR)/magnet $(LFLAGS)
 
 $(BINDIR)/tester : $(TESTOBJS)
-	$(CC) $(LFLAGS) $^ -o $(BINDIR)/tester
+	$(CC) $^ -o $(BINDIR)/tester $(LFLAGS)
 
 $(BUILDDIR)/Main.o : $(SRCDIR)/Main.cpp $(SRCDIR)/Controller.h
 	$(CC) $(CFLAGS) -I$(INCLUDE) $< -o $@
