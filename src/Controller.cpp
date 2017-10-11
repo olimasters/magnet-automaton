@@ -11,6 +11,8 @@ Controller::Controller(Settings settings):
 
 void Controller::run(void)
 {
+    // We specify framePeriod in milliseconds, and initialise it with 1000*the
+    // reciprocal of settings.framerate (whose unit is frames/second).
     std::chrono::duration<int,std::ratio<1,1000>> framePeriod((int)(1000.0/settings.framerate));
     std::chrono::system_clock::time_point lastFrame;
     for(int i = 0; ; i = (i+1)%1000)
@@ -20,7 +22,7 @@ void Controller::run(void)
         if(!i && magnet.isStable())
             break;
         magnet.randomUpdate();
-        // We only want to update the screen once 1/framerate has passed.
+        // We only want to update the screen once framePeriod has passed.
         std::this_thread::sleep_until(lastFrame + framePeriod);
         visualiser.updateScreen();
     }
